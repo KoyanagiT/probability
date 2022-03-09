@@ -1,4 +1,5 @@
 import math as m
+import xlrd
 
 def EVSReturner(data):
     size = len(data)
@@ -14,6 +15,17 @@ def EVSReturner(data):
     return E,V,S
 
 if __name__ == "__main__":
-    data = [1,3,5,4,2,3,10,1,4,6,7,2]
-    EVS = EVSReturner(data)
-    print(EVS[1])
+    d=[]
+    d2=[]
+    wb = xlrd.open_workbook('sample.xlsx')
+    sheet = wb.sheet_by_name('Sheet1')
+    d = sheet.col_values(0)
+    d2 = sheet.col_values(1)
+    EVS1 = EVSReturner(d)
+    EVS2 = EVSReturner(d2)
+    print("xの平均 : {0}".format(EVS1[0]))
+    print("yの平均 : {0}".format(EVS2[0]))
+    print("xの分散 : {0}".format(EVS1[1]))
+    print("yの分散 : {0}".format(EVS2[1]))
+    print("xの標準偏差 : {0}".format(EVS1[2]))
+    print("yの標準偏差 : {0}".format(EVS2[2]))
